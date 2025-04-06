@@ -122,6 +122,10 @@ export class ActivityWarashiDevItem extends LitElement {
 			border-radius: 8px;
 		}
 
+		.activity-warashi-dev-item-link>* {
+			min-width: 0;
+		}
+
 		.activity-warashi-dev-item-link:hover {
 			background-color: #f0f0f0;
 			text-decoration: none;
@@ -138,6 +142,10 @@ export class ActivityWarashiDevItem extends LitElement {
 			font-size: 16px;
 			font-weight: bold;
 			color: rgb(90, 90, 90);
+
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 
 		.activity-warashi-dev-item-link-number {
@@ -145,12 +153,16 @@ export class ActivityWarashiDevItem extends LitElement {
 			color: gray;
 			display: flex;
 			justify-content: flex-end;
-			flex-grow: 1;
+			text-align: right;
 		}
 
 		.activity-warashi-dev-item-link-repository {
 			font-size: 14px;
 			color: gray;
+
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 
 		.activity-warashi-dev-item-link-time {
@@ -159,6 +171,7 @@ export class ActivityWarashiDevItem extends LitElement {
 			display: flex;
 			justify-content: flex-end;
 			flex-grow: 1;
+			text-align: right;
 		}
 
 		.activity-warashi-dev-item-link-repository {
@@ -188,23 +201,21 @@ export class ActivityWarashiDevItem extends LitElement {
             <div>
                 <a href="${this.activity.url}" target="_blank" rel="noopener noreferrer" class="activity-warashi-dev-item-link">
                     <img src="${this.activity.repository.owner.avatarUrl}&size=48" alt="${this.activity.repository.owner.login}" loading="lazy" class="activity-warashi-dev-profile-image"/>
-                    <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
-                        <div style="display: flex; flex-direction: row; gap: 4px;">
-                            <div style="display: flex; flex-direction: row; gap: 8px;">
-                                <activity-warashi-dev-item-icon .activity=${this.activity}></activity-warashi-dev-item-icon>
-                                <div class="activity-warashi-dev-item-link-title">${this.activity.title}</div>
-                            </div>
-                            <div class="activity-warashi-dev-item-link-number">#${this.activity.number}</div>
+					<div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 0; flex-shrink: 1;">
+                        <div style="display: flex; flex-direction: row; gap: 8px;">
+                            <activity-warashi-dev-item-icon .activity=${this.activity}></activity-warashi-dev-item-icon>
+                            <div class="activity-warashi-dev-item-link-title">${this.activity.title}</div>
                         </div>
-                        <div style="display: flex; flex-direction: row; gap: 4px;">
-                            <div class="activity-warashi-dev-item-link-repository">
-                                <div class="activity-warashi-dev-item-link-repository-owner">${this.activity.repository.owner.login}</div>
-                                <div class="activity-warashi-dev-item-link-repository-separator">/</div>
-                                <div class="activity-warashi-dev-item-link-repository">${this.activity.repository.name}</div>
-                            </div>
-                            <div class="activity-warashi-dev-item-link-time">${getRelativeTime(new Date(this.activity.createdAt))}</div>
-                        </div>
+						<div class="activity-warashi-dev-item-link-repository">
+							<div class="activity-warashi-dev-item-link-repository-owner">${this.activity.repository.owner.login}</div>
+							<div class="activity-warashi-dev-item-link-repository-separator">/</div>
+							<div class="activity-warashi-dev-item-link-repository">${this.activity.repository.name}</div>
+						</div>
                     </div>
+					<div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1; flex-shrink: 0;">
+						<div class="activity-warashi-dev-item-link-number">#${this.activity.number}</div>
+						<div class="activity-warashi-dev-item-link-time">${getRelativeTime(new Date(this.activity.createdAt))}</div>
+					</div>
                 </a>
             </div>
         `;
