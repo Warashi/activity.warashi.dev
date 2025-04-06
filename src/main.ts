@@ -5,15 +5,6 @@ import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import octicons from "@primer/octicons";
 import activity from "./activity.json" assert { type: "json" };
 
-declare global {
-	interface HTMLElementTagNameMap {
-		"activity-warashi-dev-main": ActivityWarashiDevMain;
-		"activity-warashi-dev-header": ActivityWarashiDevHeader;
-		"activity-warashi-dev-item": ActivityWarashiDevItem;
-		"activity-warashi-dev-activities": ActivityWarashiDevActivities;
-	}
-}
-
 // in miliseconds
 const units = {
 	year: 24 * 60 * 60 * 1000 * 365,
