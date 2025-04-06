@@ -150,28 +150,25 @@ export class ActivityWarashiDevItem extends LitElement {
 			text-align: right;
 		}
 
-		.activity-warashi-dev-item-link-repository {
-			font-size: 14px;
-			color: gray;
-
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow: hidden;
-		}
-
 		.activity-warashi-dev-item-link-time {
 			font-size: 14px;
 			color: gray;
 			display: flex;
 			justify-content: flex-end;
-			flex-grow: 1;
 			text-align: right;
 		}
 
 		.activity-warashi-dev-item-link-repository {
+			font-size: 14px;
+			color: gray;
+
 			display: flex;
 			flex-direction: row;
 			gap: 4px;
+
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 
 		.activity-warashi-dev-item-link-repository-owner {
@@ -196,17 +193,15 @@ export class ActivityWarashiDevItem extends LitElement {
                 <a href="${this.activity.url}" target="_blank" rel="noopener noreferrer" class="activity-warashi-dev-item-link">
                     <img src="${this.activity.repository.owner.avatarUrl}&size=48" alt="${this.activity.repository.owner.login}" loading="lazy" class="activity-warashi-dev-profile-image"/>
 					<div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 0; flex-shrink: 1;">
-                        <div style="display: flex; flex-direction: row; gap: 8px;">
-                            <activity-warashi-dev-item-icon .activity=${this.activity}></activity-warashi-dev-item-icon>
-                            <div class="activity-warashi-dev-item-link-title">${this.activity.title}</div>
-                        </div>
+	                    <activity-warashi-dev-item-icon .activity=${this.activity}></activity-warashi-dev-item-icon>
+                        <div class="activity-warashi-dev-item-link-title">${this.activity.title}</div>
 						<div class="activity-warashi-dev-item-link-repository">
 							<div class="activity-warashi-dev-item-link-repository-owner">${this.activity.repository.owner.login}</div>
 							<div class="activity-warashi-dev-item-link-repository-separator">/</div>
 							<div class="activity-warashi-dev-item-link-repository">${this.activity.repository.name}</div>
 						</div>
                     </div>
-					<div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1; flex-shrink: 0;">
+					<div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1; flex-shrink: 0; justify-content: flex-end;">
 						<div class="activity-warashi-dev-item-link-number">#${this.activity.number}</div>
 						<div class="activity-warashi-dev-item-link-time">${getRelativeTime(new Date(this.activity.createdAt))}</div>
 					</div>
@@ -259,11 +254,13 @@ export class ActivityWarashiDevItemIcon extends LitElement {
 	static styles = css`
 		.activity-warashi-dev-item-icon-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: left;
+            justify-content: left;
 			border-radius: 100vh;
 			padding: 0.3vh 1vh;
 			gap: 0.5vh;
+			flex-grow: 0;
+			flex-shrink: 0;
         }
 
         .activity-warashi-dev-item-icon {
@@ -318,30 +315,42 @@ export class ActivityWarashiDevItemIcon extends LitElement {
 			if (this.activity.prState === "OPEN") {
 				if (this.activity.isDraft) {
 					return html`
-						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-draft">
-							${unsafeSVG(this.icons["git-pull-request-draft"])}
-							<div class="activity-warashi-dev-item-icon-container-text">Draft</div>
+						<div style="display: flex; flex-direction: row;">
+							<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-draft">
+								${unsafeSVG(this.icons["git-pull-request-draft"])}
+								<div class="activity-warashi-dev-item-icon-container-text">Draft</div>
+							</div>
+							<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 						</div>
 					`;
 				}
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-open">
-						${unsafeSVG(this.icons["git-pull-request-open"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Open</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-open">
+							${unsafeSVG(this.icons["git-pull-request-open"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Open</div>
+						</div>
+						<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 					</div>
 				`;
 			} else if (this.activity.prState === "MERGED") {
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-merged">
-						${unsafeSVG(this.icons["git-pull-request-merged"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Merged</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-merged">
+							${unsafeSVG(this.icons["git-pull-request-merged"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Merged</div>
+						</div>
+						<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 					</div>
 				`;
 			} else if (this.activity.prState === "CLOSED") {
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-closed">
-						${unsafeSVG(this.icons["git-pull-request-closed"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Closed</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-pull-request-closed">
+							${unsafeSVG(this.icons["git-pull-request-closed"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Closed</div>
+						</div>
+						<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 					</div>
 				`;
 			}
@@ -349,37 +358,52 @@ export class ActivityWarashiDevItemIcon extends LitElement {
 		if (this.activity.__typename === "Issue") {
 			if (this.activity.issueState === "OPEN") {
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-opened">
-						${unsafeSVG(this.icons["issue-opened"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Open</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-opened">
+							${unsafeSVG(this.icons["issue-opened"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Open</div>
+						</div>
+						<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 					</div>
 				`;
 			} else if (this.activity.stateReason === "NOT_PLANNED") {
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed-not-planned">
-						${unsafeSVG(this.icons["issue-closed-not-planned"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Not Planned</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed-not-planned">
+							${unsafeSVG(this.icons["issue-closed-not-planned"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Not Planned</div>
+						</div>
+						<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 					</div>
 				`;
 			} else if (this.activity.stateReason === "COMPLETED") {
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed-completed">
-						${unsafeSVG(this.icons["issue-closed-completed"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Completed</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed-completed">
+							${unsafeSVG(this.icons["issue-closed-completed"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Completed</div>
+						</div>
+						<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 					</div>
 				`;
 			} else if (this.activity.stateReason === "DUPLICATE") {
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed-duplicate">
-						${unsafeSVG(this.icons["issue-closed-duplicate"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Duplicate</div>
-					</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed-duplicate">
+							${unsafeSVG(this.icons["issue-closed-duplicate"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Duplicate</div>
+						</div>
+					<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
+				</div>
 				`;
 			} else {
 				return html`
-					<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed">
-						${unsafeSVG(this.icons["issue-closed"])}
-						<div class="activity-warashi-dev-item-icon-container-text">Closed</div>
+					<div style="display: flex; flex-direction: row;">
+						<div class="activity-warashi-dev-item-icon-container activity-warashi-dev-item-icon-container-issue-closed">
+							${unsafeSVG(this.icons["issue-closed"])}
+							<div class="activity-warashi-dev-item-icon-container-text">Closed</div>
+						</div>
+						<div style="flex-grow: 1; flex-shrink: 0; max-width: 100%;"></div>
 					</div>
 				`;
 			}
