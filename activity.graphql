@@ -1,0 +1,45 @@
+{
+	search(
+		first: 30
+		query: "author:Warashi sort:created is:public"
+		type: ISSUE
+	) {
+		edges {
+			node {
+				__typename
+				... on Issue {
+					createdAt
+					issueState: state
+					stateReason(enableDuplicate: true)
+					title
+					url
+					number
+					repository {
+						owner {
+							login
+							avatarUrl
+							url
+						}
+						name
+					}
+				}
+				... on PullRequest {
+					createdAt
+					prState: state
+					isDraft
+					title
+					url
+					number
+					repository {
+						owner {
+							login
+							avatarUrl
+							url
+						}
+						name
+					}
+				}
+			}
+		}
+	}
+}
