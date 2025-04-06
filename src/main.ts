@@ -60,6 +60,7 @@ export class ActivityWarashiDevMain extends LitElement {
         :host {
             display: block;
             padding: 24px;
+			font-family: sans-serif;
         }
     `;
 }
