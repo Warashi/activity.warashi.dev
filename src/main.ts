@@ -187,7 +187,7 @@ export class ActivityWarashiDevItem extends LitElement {
 		return html`
             <div>
                 <a href="${this.activity.url}" target="_blank" rel="noopener noreferrer" class="activity-warashi-dev-item-link">
-                    <img src="${this.activity.repository.owner.avatarUrl}" alt="${this.activity.repository.owner.login}" loading="lazy" class="activity-warashi-dev-profile-image"/>
+                    <img src="${this.activity.repository.owner.avatarUrl}&size=48" alt="${this.activity.repository.owner.login}" loading="lazy" class="activity-warashi-dev-profile-image"/>
                     <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
                         <div style="display: flex; flex-direction: row; gap: 4px;">
                             <div style="display: flex; flex-direction: row; gap: 8px;">
