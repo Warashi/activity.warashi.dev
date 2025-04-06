@@ -136,6 +136,8 @@ export class ActivityWarashiDevItem extends LitElement {
 			width: 48px;
 			height: 48px;
 			align-self: center;
+			flex-shrink: 0;
+			flex-grow: 0;
 		}
 
 		.activity-warashi-dev-item-link-title {
