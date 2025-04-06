@@ -115,7 +115,7 @@ export class ActivityWarashiDevItem extends LitElement {
 		.activity-warashi-dev-item-link {
 			display: flex;
 			flex-direction: row;
-			width: 100%;
+			max-width: 100%;
 			gap: 16px;
 			text-decoration: none;
 			padding: 8px;
