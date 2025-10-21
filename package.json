@@ -20,7 +20,7 @@
 		"@biomejs/biome": "1.9.4",
 		"@types/primer__octicons": "19.11.0",
 		"typescript": "5.8.3",
-		"vite": "6.3.6"
+		"vite": "6.4.1"
 	},
 	"engines": {
 		"node": ">=22"
